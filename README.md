@@ -1,6 +1,6 @@
 # Zomato_Restaurant
 
-<img src="/images/readme_image.jpg" alt="Alt text" title="Optional title">
+<img src="images/readme_image.jpg">
 
 ## Problema de Negócio
 
