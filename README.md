@@ -6,7 +6,7 @@
 
 Zomato é uma plataforma de MarketPlace popular na India de agregação de restaurantes e entrega de alimentos que permite aos usuários navegar por menus, fotos e avaliações de restaurantes, bem como pedir comida online para entrega ou retirada.
 
-O objetivo deste projeto é gerar um Dashboard interativo para a empresa, a fim de fornecer insights sobre as métricas de negócios para auxiliar o direcionamento estratégico da empresa. 
+O objetivo deste projeto é gerar um [Dashboard interativo](https://luiseduardoesteves-zomato-restaurants.streamlit.app/) para a empresa, a fim de fornecer insights sobre as métricas de negócios para auxiliar o direcionamento estratégico da empresa. 
 
 Para disso, serão utilizadas técnicas avançadas de análise de dados, como a mineração de dados e modelagem estatística, para fornecer insights mais profundos e precisos. O painel será projetado para ser altamente interativo, permitindo que os usuários explorem as métricas de negócios em diferentes níveis de detalhe.
 
