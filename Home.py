@@ -128,7 +128,7 @@ def consulta_restaurante(df,order):
                                                        .rename_axis(['Restaurant','Cuisine']) )
     
     aux[['average_cost_USD','aggregate_rating'] ] = aux[['average_cost_USD','aggregate_rating']].round(1)
-    aux.columns = ['Rating','Average Cost for Two (USD)']
+    aux.columns = ['Average Cost for Two (USD)','Rating']
 
     if order == 'Top Rated':
         return aux.sort_values(by = 'Rating',ascending = False )
@@ -151,7 +151,7 @@ df = clean_code( df )
 #============================================
 
 # Icon
-image_path = 'zomato.jpg'
+image_path = 'images/zomato.jpg'
 zomato_icon = Image.open( image_path )
 st.sidebar.image( zomato_icon )
 
