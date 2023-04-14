@@ -15,7 +15,7 @@ df = clean_code( df )
 #============================================
 
 # Icon
-image_path = 'zomato.jpg'
+image_path = 'images/zomato.jpg'
 image = Image.open( image_path )
 st.sidebar.image( image )
 
@@ -23,8 +23,8 @@ st.sidebar.image( image )
 st.sidebar.write('Here you can find information related types of cuisines in dataset')
 
 # Sidebar widgets for filtering
-selected_cuisines = st.sidebar.multiselect('Select cuisines', df['cuisines'].unique(),default = df['cuisines'].value_counts().nlargest(5).index.tolist(), help = 'All options will be shown if none is selected')
-selected_countries = st.sidebar.multiselect('Select countries', df['country'].unique(),default = df['country'].value_counts().nlargest(5).index.tolist(), help = 'All options will be shown if none is selected')
+selected_cuisines = st.sidebar.multiselect('Select cuisines', df['cuisines'].unique(),default = df['cuisines'].value_counts().nlargest(5).index.tolist(), help = 'All options are shown if none is selected')
+selected_countries = st.sidebar.multiselect('Select countries', df['country'].unique(),default = df['country'].value_counts().nlargest(5).index.tolist(), help = 'All options are shown if none is selected')
 selected_price_tyes = st.sidebar.multiselect('Select price tyeps', df['price_tye'].unique(), default = df['price_tye'].unique())
 
 if not selected_cuisines:
@@ -67,7 +67,7 @@ with st.container():
 
     with col2: #BAR CHART - Rating per Cuisine
         df_grouped = (  filtered_data[['cuisines','aggregate_rating']].groupby('cuisines')
-                                                                      .sum()
+                                                                      .mean()
                                                                       .reset_index()
                                                                       .sort_values(by = 'aggregate_rating',ascending = False) )
                         
