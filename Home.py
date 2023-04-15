@@ -155,25 +155,36 @@ image_path = 'images/zomato.jpg'
 zomato_icon = Image.open( image_path )
 st.sidebar.image( zomato_icon )
 
-# Sidebar widgets for filtering
+
+# Sidebar widgets for filtering==============
+
 selected_country = st.sidebar.selectbox('Select country', df['country'].unique() , 1 )
-selected_city = st.sidebar.selectbox('Select City', df[df['country'] == selected_country]['city'].unique() )
+
+# Storage available options of cities in selected country
+city_options = df[df['country'] == selected_country]['city'].unique()
+selected_city = st.sidebar.selectbox('Select City', city_options )
 
 # Storage available options of cuisines in selected country and city
-cuisine_options = df[(df['country'] == selected_country) & (df['city'] == selected_city)]['cuisines'].unique()
-selected_cuisines = st.sidebar.multiselect('Select cuisine',cuisine_options,help = 'All options are shown if none is selected')
+cuisine_options   = df[(df['country'] == selected_country) & 
+                       (df['city'] == selected_city)]['cuisines'].unique()
+
+selected_cuisines = st.sidebar.multiselect('Select cuisine', cuisine_options, help = 'All options are shown if none is selected')
 
 # If any cuisine is marked on filter, storage list of all options to show on map. Avoiding an error if the user remove all filters
 if not selected_cuisines:
     selected_cuisines = cuisine_options
 
-select_order = st.sidebar.selectbox('Ordey by', ['Top Rated','Worst Rated','Most Expensive','Most Affordables'])
+price_tyes_options = df[(df['country'] == selected_country) & 
+                        (df['city'] == selected_city) & 
+                        (df['cuisines'].isin(selected_cuisines)) ]['price_tye'].unique()
 
-selected_price_tyes = st.sidebar.multiselect('Select price tyes', df['price_tye'].unique(),help = 'All options are shown if none is selected')
+selected_price_tyes = st.sidebar.multiselect('Select price tyes', price_tyes_options , help = 'All options are shown if none is selected')
 
 # If any price tye is marked on filter, storage list of all options to show on map. Avoiding an error if the user remove all filters
 if not selected_price_tyes:
-    selected_price_tyes = df['price_tye'].unique()
+    selected_price_tyes = price_tyes_options
+
+select_order = st.sidebar.selectbox('Ordey by', ['Top Rated','Worst Rated','Most Expensive','Most Affordables'])
 
 # Filter the dataframe based on selected filters
 filtered_data = df[ (df['cuisines'].isin(selected_cuisines)) & 
@@ -230,7 +241,6 @@ with st.container():
         # Add markers to the marker cluster using apply and lambda
         filtered_data.apply(lambda row: folium.Marker(location = [ row['latitude'], row['longitude'] ],
                                                         popup = row[ ['restaurant_name','cuisines'] ] ,
-                                                        icon = folium.Icon(icon = 'cutlery'),
                                                         use_container_width = True ).add_to(marker_cluster), axis = 1)
         
         # Show the map      
